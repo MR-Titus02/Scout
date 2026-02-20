@@ -1,0 +1,34 @@
+{
+  "name": "kilinochchi-scout-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext .ts,.tsx",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,md}\""
+  },
+  "dependencies": {
+    "react": "^18.x",
+    "react-dom": "^18.x",
+    "react-router-dom": "^6.x",
+    "axios": "^1.x",
+    "clsx": "^2.x"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.x",
+    "@types/react": "^18.x",
+    "@types/react-dom": "^18.x",
+    "typescript": "^5.x",
+    "vite": "^5.x",
+    "tailwindcss": "^3.x",
+    "postcss": "^8.x",
+    "autoprefixer": "^10.x",
+    "prettier": "^3.x",
+    "eslint": "^8.x",
+    "eslint-plugin-react": "^7.x",
+    "eslint-plugin-react-hooks": "^4.x",
+    "eslint-config-prettier": "^9.x"
+  }
+}

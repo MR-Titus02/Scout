@@ -1,0 +1,10 @@
+[
+  {
+    "id": "U-0001",
+    "name": "1st Kilinochchi Troop",
+    "type": "Troop",
+    "scouts": [
+      { "scout_id": "KIL-2026-00001", "display_name": "Amal", "unit_id": "U-0001", "rank": "Tenderfoot", "profile_photo_url": "" }
+    ]
+  }
+]
