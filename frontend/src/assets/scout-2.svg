@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 200 200">
+  <rect width="200" height="200" rx="12" fill="#f0f9ff" />
+  <circle cx="100" cy="70" r="32" fill="#dbeafe" />
+  <rect x="40" y="120" width="120" height="50" rx="8" fill="#d6efff" />
+  <text x="100" y="180" font-size="12" text-anchor="middle" fill="#0f172a">Scout</text>
+</svg>

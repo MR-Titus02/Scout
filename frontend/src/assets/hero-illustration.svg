@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#1e7a3a" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#2fa46a" stop-opacity="0.95"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" fill="url(#g)" rx="24" />
+  <g fill="#fff" opacity="0.95">
+    <circle cx="220" cy="220" r="80" />
+    <circle cx="360" cy="180" r="60" />
+    <rect x="520" y="120" width="360" height="240" rx="18" />
+  </g>
+  <text x="60" y="480" fill="rgba(255,255,255,0.9)" font-size="28" font-family="sans-serif">Kilinochchi District Scouts — community, service, growth</text>
+</svg>

@@ -1,3 +1,4 @@
 [
-  { "scout_id": "KIL-2026-00001", "display_name": "Amal", "unit_id": "U-0001", "rank": "Tenderfoot", "profile_photo_url": "" }
+  { "scout_id": "KIL-2026-00001", "display_name": "Amal", "unit_id": "U-0001", "rank": "Tenderfoot", "profile_photo": "scout-1.svg" },
+  { "scout_id": "KIL-2026-00002", "display_name": "Nisha", "unit_id": "U-0001", "rank": "Second Class", "profile_photo": "scout-2.svg" }
 ]

@@ -8,7 +8,14 @@ type Props = {
 }
 
 function Avatar({ name, photo }: { name: string; photo?: string }){
-  if(photo) return <img src={photo} alt={`Photo of ${name}`} loading="lazy" className="img-cover" />
+  if(photo){
+    try{
+      const src = new URL(`../assets/${photo}`, import.meta.url).href
+      return <img src={src} alt={`Photo of ${name}`} loading="lazy" className="img-cover" />
+    }catch{
+      return <img src={photo} alt={`Photo of ${name}`} loading="lazy" className="img-cover" />
+    }
+  }
   // simple SVG fallback avatar
   return (
     <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-600">

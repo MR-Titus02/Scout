@@ -24,4 +24,4 @@ export interface EventDTO {
   location?: string
 }
 
-export interface NewsDTO { id: string; title: string; date: string; body?: string }
+export interface NewsDTO { id: string; title: string; date: string; body?: string; tag?: string; excerpt?: string; }
