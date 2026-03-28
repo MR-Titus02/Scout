@@ -1,72 +1,147 @@
 import React from 'react'
-import { getNews } from '../lib/api'
+import JourneyCard from '../components/JourneyCard'
+import NewsEventsSection from '../components/NewsEventsSection'
+import SectionHeading from '../components/SectionHeading'
+import StatsSection from '../components/StatsSection'
+import { getEvents, getNews } from '../lib/api'
+import type { EventDTO, NewsDTO } from '../lib/contracts'
+
+const journeyData = [
+  {
+    id: 'singithi',
+    title: 'Singithi',
+    description: 'Ages 6-8, where curiosity, confidence, and teamwork begin through playful discovery.',
+    imageUrl: 'https://picsum.photos/seed/singithi-scout/720/900',
+    href: '#singithi',
+  },
+  {
+    id: 'cubs',
+    title: 'Cubs',
+    description: 'Ages 8-11, growing through badges, outdoor challenges, and meaningful community habits.',
+    imageUrl: 'https://picsum.photos/seed/cubs-scout/720/900',
+    href: '#cubs',
+  },
+  {
+    id: 'junior',
+    title: 'Junior',
+    description: 'Ages 11-14, building independence with service projects, fieldcraft, and adventure.',
+    imageUrl: 'https://picsum.photos/seed/junior-scout/720/900',
+    href: '#junior',
+  },
+  {
+    id: 'senior',
+    title: 'Senior',
+    description: 'Ages 14-17, preparing young leaders through planning, teamwork, and district participation.',
+    imageUrl: 'https://picsum.photos/seed/senior-scout/720/900',
+    href: '#senior',
+  },
+  {
+    id: 'rover',
+    title: 'Rover',
+    description: 'Young adults serving as mentors, volunteers, and role models across local units.',
+    imageUrl: 'https://picsum.photos/seed/rover-scout/720/900',
+    href: '#rover',
+  },
+  {
+    id: 'adult',
+    title: 'Adult Scouts',
+    description: 'Dedicated leaders and supporters creating safe, inspiring spaces for every scout.',
+    imageUrl: 'https://picsum.photos/seed/adult-scout/720/900',
+    href: '#adult',
+  },
+]
 
 export default function Home(){
-  const [news, setNews] = React.useState<any[]>([])
+  const [news, setNews] = React.useState<NewsDTO[]>([])
+  const [events, setEvents] = React.useState<EventDTO[]>([])
 
-  React.useEffect(()=>{ getNews().then(setNews) }, [])
+  React.useEffect(() => {
+    let isMounted = true
+
+    Promise.all([getNews(), getEvents()]).then(([newsItems, eventItems]) => {
+      if (!isMounted) {
+        return
+      }
+
+      setNews(newsItems)
+      setEvents(eventItems)
+    })
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  const newsItems = news.slice(0, 8).map((item) => ({
+    id: item.id,
+    title: item.title,
+    date: item.date,
+    excerpt: item.excerpt,
+    tag: item.tag,
+    imageUrl: `https://picsum.photos/seed/${encodeURIComponent(item.id)}/640/840`,
+  }))
+
+  const eventItems = events.slice(0, 4).map((item) => ({
+    id: item.id,
+    title: item.title,
+    date: item.start_date,
+    excerpt: item.location || 'District-wide scouting event',
+    tag: 'Event',
+    imageUrl: `https://picsum.photos/seed/${encodeURIComponent(item.id)}/640/840`,
+  }))
+
+  const homeFeed = [...eventItems, ...newsItems].slice(0, 6)
 
   return (
-    <div className="w-full">
-      {/* Hero Section */}
-      <section className="relative w-full overflow-hidden bg-[var(--primary)] text-white" style={{ minHeight: '320px' }}>
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: `url('https://picsum.photos/seed/forest/1920/1080')`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blend-mode(multiply) blur(2px)' }}></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--primary)] via-[var(--primary)]/90 to-transparent"></div>
-        
-        <div className="container mx-auto px-6 py-16 relative z-10 flex flex-col justify-center h-full">
-          <div className="max-w-3xl fade-in pt-8">
-            <h1 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6 tracking-tight leading-tight">Kilinochchi District Scout Branch</h1>
-            <p className="text-xl md:text-2xl text-white/90 font-serif leading-relaxed max-w-2xl text-shadow-sm">Building Tomorrow's Leaders Through Service,<br/>Adventure & Brotherhood</p>
+    <main id="main" className="w-full bg-[var(--tone-page)] text-slate-900">
+      <section className="relative min-h-[560px] overflow-hidden md:min-h-[700px]">
+        <img
+          src="https://picsum.photos/seed/scout-hero/1920/1200"
+          alt="Scouting outdoor activity"
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(21,29,20,0.24)_0%,rgba(21,29,20,0.36)_34%,rgba(21,29,20,0.76)_100%)]" />
+        <div className="relative z-10 mx-auto flex min-h-[560px] max-w-[1360px] items-center px-4 pb-16 pt-28 md:min-h-[700px] md:justify-end md:pt-36">
+          <div className="max-w-[420px] text-center text-white md:text-left">
+            <h1 className="text-5xl font-black uppercase leading-[0.95] tracking-tight md:text-7xl">Beyond Boundaries</h1>
+            <p className="mt-4 text-sm leading-6 text-white/84 md:text-base">
+              Inspiring young people across Kilinochchi through leadership, service, resilience, and outdoor adventure.
+            </p>
+            <a
+              href="#journey"
+              className="mt-6 inline-flex items-center justify-center rounded-full bg-[var(--tone-paper)] px-6 py-3 text-sm font-bold text-[var(--tone-heading)] shadow-xl transition hover:bg-[var(--tone-sand)]"
+            >
+              Join the Movement
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center slide-up max-w-4xl mx-auto border-b pb-8">
-          <div className="flex flex-col items-center">
-            <svg className="w-12 h-12 text-[#cc9d5e] mb-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" /></svg>
-            <div className="text-3xl font-bold text-[var(--primary)] font-serif">196</div>
-            <div className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Active Scouts</div>
+      <section id="journey" className="bg-[var(--tone-paper)] px-4 py-12 md:py-14">
+        <div className="mx-auto max-w-[1360px]">
+          <div className="mb-8 flex items-center justify-between gap-4">
+            <SectionHeading
+              title="Our Scouting Journey"
+              subtitle="Choose your path from first steps in scouting to adult leadership and service."
+            />
+            <div className="hidden items-center gap-2 md:flex">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[rgba(74,94,63,0.18)] text-[var(--tone-olive)]">&lt;</span>
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[rgba(74,94,63,0.18)] text-[var(--tone-olive)]">&gt;</span>
+            </div>
           </div>
-          <div className="flex flex-col items-center">
-            <svg className="w-12 h-12 text-[#cc9d5e] mb-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 2l1.6 4.9h5.1l-4.1 3 1.6 4.9L10 11.8l-4.2 3 1.6-4.9-4.1-3h5.1L10 2z" clipRule="evenodd" /></svg>
-            <div className="text-3xl font-bold text-[var(--primary)] font-serif">342</div>
-            <div className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Badges Awarded</div>
-          </div>
-          <div className="flex flex-col items-center">
-            <svg className="w-12 h-12 text-[#cc9d5e] mb-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" /></svg>
-            <div className="text-3xl font-bold text-[var(--primary)] font-serif">35</div>
-            <div className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Events Organized</div>
+
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-6">
+            {journeyData.map((item) => (
+              <JourneyCard key={item.id} title={item.title} description={item.description} imageUrl={item.imageUrl} href={item.href} />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Latest News & Events */}
-      <section className="container mx-auto px-4 py-8 mb-16">
-        <h2 className="text-center text-3xl font-bold font-serif text-gray-900 mb-8">Latest News & Events</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto text-left">
-          {news.map((item, i) => (
-            <article key={item.id} className="bg-gray-50 rounded-xl p-6 shadow-sm border border-gray-100 slide-up" style={{ animationDelay: `${i * 100}ms` }}>
-              <div className="flex justify-between items-start mb-3">
-                <span className="bg-[#cceda8]/50 text-[#285e2b] px-3 py-1 rounded-full text-xs font-bold">{item.tag || 'News'}</span>
-                <span className="text-xs text-gray-500 font-semibold">{item.date}</span>
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2 leading-tight">{item.title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">{item.excerpt || item.body || ''}</p>
-            </article>
-          ))}
-        </div>
+      <NewsEventsSection items={homeFeed} />
 
-        <div className="text-center mt-8">
-          <a href="/news" className="inline-flex items-center justify-center gap-2 bg-[#adeba2] text-[#1f5c22] hover:bg-[#9de092] transition px-6 py-2 rounded-full font-bold shadow-sm">
-            view all
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-          </a>
-        </div>
-      </section>
-    </div>
+      <StatsSection />
+    </main>
   )
 }
