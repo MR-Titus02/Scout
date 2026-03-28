@@ -4,18 +4,30 @@
 
 html, body, #root { height: 100%; }
 
-:root { --color-scout-green: #0F4C23 }
+:root {
+	--color-scout-green: #0F4C23;
+	--tone-page: #f3efe7;
+	--tone-paper: #fbf8f3;
+	--tone-sand: #e8dccb;
+	--tone-olive: #305e63;
+	--tone-forest: #18353b;
+	--tone-deep: #0d1d23;
+	--tone-heading: #1d3e44;
+	--tone-muted: #667b7f;
+	--tone-gold: #c28a4a;
+	--tone-gold-soft: #dec39f;
+}
 
-body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial }
+body { font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif }
 
 /* Theme variables */
 :root {
-	--bg: #ffffff;
-	--surface: #f8fafb;
+	--bg: var(--tone-page);
+	--surface: var(--tone-paper);
 	--text: #0f172a;
-	--muted: #6b7280;
-	--primary: #0F4C23;
-	--accent: #0B3A1A;
+	--muted: var(--tone-muted);
+	--primary: var(--tone-olive);
+	--accent: var(--tone-forest);
 }
 
 .theme-dark {
@@ -30,6 +42,7 @@ body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", 
 body {
 	background-color: var(--bg);
 	color: var(--text);
+	margin: 0;
 }
 
 /* Simple animation helpers */
@@ -77,5 +90,3 @@ body {
 
 /* Image utilities */
 .img-cover{ width:100%; height:100%; object-fit:cover; display:block }
-
-
