@@ -5,48 +5,55 @@ import SectionHeading from '../components/SectionHeading'
 import StatsSection from '../components/StatsSection'
 import { getEvents, getNews } from '../lib/api'
 import type { EventDTO, NewsDTO } from '../lib/contracts'
+import heroImage from '../assets/Hero_image.png'
+import heroImageMobile from '../assets/Hero_image_mobile.png'
+import adultLeaderImage from '../assets/Adult_leader.png'
+import cubScoutImage from '../assets/Cub_scout.png'
+import juniorScoutImage from '../assets/Junior_Scout.png'
+import roverScoutImage from '../assets/Rover_Scout.png'
+import seniorScoutImage from '../assets/Senior_Scout.png'
+import singithiScoutImage from '../assets/Singithi_Scout.png'
 
 const journeyData = [
   {
     id: 'singithi',
     title: 'Singithi',
-    description: 'Ages 6-8, where curiosity, confidence, and teamwork begin through playful discovery.',
-    imageUrl: 'https://picsum.photos/seed/singithi-scout/720/900',
+    ageCategory: '6-8',
+    imageUrl: singithiScoutImage,
     href: '#singithi',
   },
   {
     id: 'cubs',
     title: 'Cubs',
-    description: 'Ages 8-11, growing through badges, outdoor challenges, and meaningful community habits.',
-    imageUrl: 'https://picsum.photos/seed/cubs-scout/720/900',
+    ageCategory: '8-11',
+    imageUrl: cubScoutImage,
     href: '#cubs',
   },
   {
     id: 'junior',
     title: 'Junior',
-    description: 'Ages 11-14, building independence with service projects, fieldcraft, and adventure.',
-    imageUrl: 'https://picsum.photos/seed/junior-scout/720/900',
+    ageCategory: '11-14',
+    imageUrl: juniorScoutImage,
     href: '#junior',
   },
   {
     id: 'senior',
     title: 'Senior',
-    description: 'Ages 14-17, preparing young leaders through planning, teamwork, and district participation.',
-    imageUrl: 'https://picsum.photos/seed/senior-scout/720/900',
+    ageCategory: '14-17',
+    imageUrl: seniorScoutImage,
     href: '#senior',
   },
   {
     id: 'rover',
     title: 'Rover',
-    description: 'Young adults serving as mentors, volunteers, and role models across local units.',
-    imageUrl: 'https://picsum.photos/seed/rover-scout/720/900',
+    ageCategory: '17-26',
+    imageUrl: roverScoutImage,
     href: '#rover',
   },
   {
     id: 'adult',
     title: 'Adult Scouts',
-    description: 'Dedicated leaders and supporters creating safe, inspiring spaces for every scout.',
-    imageUrl: 'https://picsum.photos/seed/adult-scout/720/900',
+    imageUrl: adultLeaderImage,
     href: '#adult',
   },
 ]
@@ -95,22 +102,22 @@ export default function Home(){
   return (
     <main id="main" className="w-full bg-[var(--tone-page)] text-slate-900">
       <section className="relative min-h-[560px] overflow-hidden md:min-h-[700px]">
-        <img
-          src="https://picsum.photos/seed/scout-hero/1920/1200"
-          alt="Scouting outdoor activity"
-          className="absolute inset-0 h-full w-full object-cover"
-          loading="eager"
-        />
+        <picture>
+          <source media="(max-width: 767px)" srcSet={heroImageMobile} />
+          <img
+            src={heroImage}
+            alt="Scouting outdoor activity"
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="eager"
+          />
+        </picture>
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(21,29,20,0.24)_0%,rgba(21,29,20,0.36)_34%,rgba(21,29,20,0.76)_100%)]" />
-        <div className="relative z-10 mx-auto flex min-h-[560px] max-w-[1360px] items-center px-4 pb-16 pt-28 md:min-h-[700px] md:justify-end md:pt-36">
+        <div className="relative z-10 mx-auto flex min-h-[560px] max-w-[1360px] items-start px-4 pb-16 pt-[90px] md:min-h-[700px] md:items-center md:justify-end md:pt-36">
           <div className="max-w-[420px] text-center text-white md:text-left">
             <h1 className="text-5xl font-black uppercase leading-[0.95] tracking-tight md:text-7xl">Beyond Boundaries</h1>
-            <p className="mt-4 text-sm leading-6 text-white/84 md:text-base">
-              Inspiring young people across Kilinochchi through leadership, service, resilience, and outdoor adventure.
-            </p>
             <a
               href="#journey"
-              className="mt-6 inline-flex items-center justify-center rounded-full bg-[var(--tone-paper)] px-6 py-3 text-sm font-bold text-[var(--tone-heading)] shadow-xl transition hover:bg-[var(--tone-sand)]"
+              className="mt-5 inline-flex items-center justify-center rounded-full border border-white/25 bg-[rgba(244,239,227,0.12)] px-6 py-3 text-sm font-bold text-white shadow-xl backdrop-blur-2xl transition-all duration-300 hover:border-[var(--tone-paper)] hover:bg-[var(--tone-paper)] hover:text-[var(--tone-heading)]"
             >
               Join the Movement
             </a>
@@ -133,7 +140,7 @@ export default function Home(){
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-6">
             {journeyData.map((item) => (
-              <JourneyCard key={item.id} title={item.title} description={item.description} imageUrl={item.imageUrl} href={item.href} />
+              <JourneyCard key={item.id} title={item.title} ageCategory={item.ageCategory} imageUrl={item.imageUrl} href={item.href} />
             ))}
           </div>
         </div>
