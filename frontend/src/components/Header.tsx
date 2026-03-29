@@ -19,10 +19,10 @@ export default function Header(){
   }, [location.pathname])
 
   return (
-    <header className={isHome ? 'absolute inset-x-0 top-0 z-50' : 'sticky left-0 right-0 top-0 z-50 border-b border-black/10 bg-[rgba(244,239,227,0.82)] backdrop-blur-2xl'}>
+    <header className={isHome ? 'fixed inset-x-0 top-0 z-50' : 'sticky left-0 right-0 top-0 z-50'}>
       <a href="#main" className="skip-link">Skip to content</a>
       <div className="mx-auto max-w-[1360px] px-4 pt-4">
-        <div className={`relative flex items-center justify-between gap-4 rounded-[22px] border px-4 py-3 shadow-[0_12px_40px_rgba(24,33,26,0.14)] ${isHome ? 'border-white/25 bg-[rgba(244,239,227,0.12)] text-white backdrop-blur-2xl' : 'border-[rgba(55,73,56,0.12)] bg-[rgba(244,239,227,0.78)] text-[var(--tone-forest)] backdrop-blur-2xl'}`}>
+        <div className={`relative flex items-center justify-between gap-4 rounded-[22px] border px-4 py-3 shadow-[0_12px_40px_rgba(24,33,26,0.14)] ${isHome ? 'border-white/25 bg-[rgba(24,33,26,0.28)] text-white backdrop-blur-2xl' : 'border-[rgba(55,73,56,0.12)] bg-[rgba(244,239,227,0.82)] text-[var(--tone-forest)] backdrop-blur-2xl'}`}>
           <Link to="/" className="flex items-center gap-3">
             <img
               src="https://picsum.photos/seed/scoutlogo/80"
@@ -51,14 +51,14 @@ export default function Header(){
           </button>
 
           <nav className={`${isOpen ? 'absolute left-0 right-0 top-[calc(100%+0.75rem)] block' : 'hidden'} sm:static sm:block`}>
-            <ul className={`flex flex-col gap-2 rounded-[20px] border p-4 text-sm font-semibold sm:flex-row sm:items-center sm:gap-2 sm:border-0 sm:bg-transparent sm:p-0 ${isHome ? 'border-white/25 bg-[rgba(244,239,227,0.14)] text-white shadow-xl backdrop-blur-2xl sm:shadow-none' : 'border-[rgba(55,73,56,0.12)] bg-[rgba(244,239,227,0.92)] text-[var(--tone-forest)] shadow-lg sm:shadow-none'}`}>
+            <ul className={`flex flex-col gap-2 rounded-[20px] border p-4 text-sm font-semibold shadow-lg sm:flex-row sm:items-center sm:gap-2 sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none ${isHome ? 'border-[rgba(244,239,227,0.28)] bg-[rgba(244,239,227,0.96)] text-[var(--tone-forest)] backdrop-blur-2xl sm:border-0 sm:bg-transparent sm:text-white' : 'border-[rgba(55,73,56,0.12)] bg-[rgba(244,239,227,0.96)] text-[var(--tone-forest)] backdrop-blur-2xl'}`}>
               {navItems.map((item) => (
                 <li key={item.label}>
                   {'to' in item ? (
                     <NavLink
                       to={item.to}
                       className={({ isActive }) =>
-                        `block rounded-full px-4 py-2 transition ${isHome ? (isActive ? 'bg-white/24 text-white ring-1 ring-white/40 shadow-[inset_0_1px_0_rgba(255,255,255,0.16)]' : 'text-white/88 hover:bg-white/10') : (isActive ? 'bg-[var(--tone-olive)] text-white' : 'text-[var(--tone-forest)] hover:bg-[rgba(74,94,63,0.08)]')}`
+                        `block rounded-full px-4 py-2 transition ${isHome ? (isActive ? 'bg-[var(--tone-olive)] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16)] sm:bg-white/24 sm:text-white sm:ring-1 sm:ring-white/40' : 'text-[var(--tone-forest)] hover:bg-[rgba(74,94,63,0.08)] sm:text-white/88 sm:hover:bg-white/10') : (isActive ? 'bg-[var(--tone-olive)] text-white' : 'text-[var(--tone-forest)] hover:bg-[rgba(74,94,63,0.08)]')}`
                       }
                     >
                       {item.label}
@@ -67,7 +67,7 @@ export default function Header(){
                     <a
                       href={item.href}
                       onClick={() => setIsOpen(false)}
-                      className={`block rounded-full px-4 py-2 transition ${isHome ? 'text-white/88 hover:bg-white/10' : 'text-[var(--tone-forest)] hover:bg-[rgba(74,94,63,0.08)]'}`}
+                      className={`block rounded-full px-4 py-2 transition ${isHome ? 'text-[var(--tone-forest)] hover:bg-[rgba(74,94,63,0.08)] sm:text-white/88 sm:hover:bg-white/10' : 'text-[var(--tone-forest)] hover:bg-[rgba(74,94,63,0.08)]'}`}
                     >
                       {item.label}
                     </a>
