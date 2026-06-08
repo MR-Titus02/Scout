@@ -14,7 +14,7 @@ import Contact from './pages/Contact.tsx'
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/Scout">
         <Routes>
           <Route path="/" element={<App />}> 
             <Route index element={<Home />} />
