@@ -1,6 +1,8 @@
 import React from 'react'
 import JourneyCard from '../components/JourneyCard'
+import JoinModal from '../components/JoinModal'
 import NewsEventsSection from '../components/NewsEventsSection'
+import ScoutActivitiesSection from '../components/ScoutActivitiesSection'
 import SectionHeading from '../components/SectionHeading'
 import StatsSection from '../components/StatsSection'
 import { getEvents, getNews } from '../lib/api'
@@ -58,9 +60,18 @@ const journeyData = [
   },
 ]
 
+const heroImages = [heroImage, adultLeaderImage, roverScoutImage, ]
+
 export default function Home(){
   const [news, setNews] = React.useState<NewsDTO[]>([])
   const [events, setEvents] = React.useState<EventDTO[]>([])
+  const [heroIndex, setHeroIndex] = React.useState(0)
+  const [isJoinOpen, setIsJoinOpen] = React.useState(false)
+
+  React.useEffect(() => {
+    const id = setInterval(() => setHeroIndex(v => (v + 1) % heroImages.length), 6000)
+    return () => clearInterval(id)
+  }, [])
 
   React.useEffect(() => {
     let isMounted = true
@@ -101,29 +112,32 @@ export default function Home(){
 
   return (
     <main id="main" className="w-full bg-[var(--tone-page)] text-slate-900">
-      <section className="relative min-h-[560px] overflow-hidden md:min-h-[700px]">
-        <picture>
-          <source media="(max-width: 767px)" srcSet={heroImageMobile} />
+      <section className="relative h-screen overflow-hidden" style={{ minHeight: '100svh' }}>
+        {heroImages.map((src, i) => (
           <img
-            src={heroImage}
-            alt="Scouting outdoor activity"
-            className="absolute inset-0 h-full w-full object-cover"
-            loading="eager"
+            key={src}
+            src={src}
+            alt="Scouting activity"
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${i === heroIndex ? 'opacity-100' : 'opacity-0'}`}
+            loading={i === 0 ? "eager" : "lazy"}
           />
-        </picture>
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(21,29,20,0.24)_0%,rgba(21,29,20,0.36)_34%,rgba(21,29,20,0.76)_100%)]" />
-        <div className="relative z-10 mx-auto flex min-h-[560px] max-w-[1360px] items-start px-4 pb-16 pt-[90px] md:min-h-[700px] md:items-center md:justify-end md:pt-36">
-          <div className="max-w-[420px] text-center text-white md:text-left">
+        ))}
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+        <div className="relative z-10 mx-auto flex h-full min-h-screen w-full max-w-[1360px] items-end justify-end px-4 pb-24 pt-[120px] md:items-center md:pt-[120px]">
+          <div className="max-w-[540px] text-left text-white">
             <h1 className="text-5xl font-black uppercase leading-[0.95] tracking-tight md:text-7xl">Beyond Boundaries</h1>
-            <a
-              href="#journey"
-              className="mt-5 inline-flex items-center justify-center rounded-full border border-white/25 bg-[rgba(244,239,227,0.12)] px-6 py-3 text-sm font-bold text-white shadow-xl backdrop-blur-2xl transition-all duration-300 hover:border-[var(--tone-paper)] hover:bg-[var(--tone-paper)] hover:text-[var(--tone-heading)]"
+            <p className="mt-4 text-lg text-white/90 font-medium">Join a community dedicated to leadership, outdoor adventure, and public service. Step forward to explore your potential and serve the district.</p>
+            <button
+              onClick={() => setIsJoinOpen(true)}
+              className="btn-primary mt-8"
             >
               Join the Movement
-            </a>
+            </button>
           </div>
         </div>
       </section>
+
+      <JoinModal isOpen={isJoinOpen} onClose={() => setIsJoinOpen(false)} />
 
       <section id="journey" className="bg-[var(--tone-paper)] px-4 py-12 md:py-14">
         <div className="mx-auto max-w-[1360px]">
@@ -145,6 +159,8 @@ export default function Home(){
           </div>
         </div>
       </section>
+
+      {/* <ScoutActivitiesSection /> */}
 
       <NewsEventsSection items={homeFeed} />
 

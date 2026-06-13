@@ -18,7 +18,7 @@ html, body, #root { height: 100%; }
 	--tone-gold-soft: #dec39f;
 }
 
-body { font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif }
+body { font-family: "Montserrat", sans-serif; }
 
 /* Theme variables */
 :root {
@@ -90,3 +90,8 @@ body {
 
 /* Image utilities */
 .img-cover{ width:100%; height:100%; object-fit:cover; display:block }
+
+/* Button utilities */
+.btn-primary {
+	@apply inline-flex items-center justify-center rounded-full bg-[var(--tone-olive)] px-6 py-3 text-sm font-bold text-white shadow-md transition hover:bg-[var(--tone-forest)] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--tone-olive)];
+}

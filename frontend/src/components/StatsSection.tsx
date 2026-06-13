@@ -17,7 +17,7 @@ const statsData: Stat[] = [
 
 export default function StatsSection(){
   return (
-    <section className="relative overflow-hidden bg-[var(--tone-sand)] px-4 py-16 text-[var(--tone-forest)]">
+    <section className="relative overflow-hidden bg-[rgba(15,76,35,0.03)] px-4 py-16 text-[var(--tone-forest)]">
       <div className="absolute inset-x-0 top-0 h-24 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.85)_0%,rgba(255,255,255,0)_72%)]" />
       <div className="absolute left-[-120px] top-10 h-72 w-72 rounded-full bg-[rgba(106,126,84,0.18)] blur-3xl" />
       <div className="absolute bottom-0 right-[-120px] h-80 w-80 rounded-full bg-[rgba(193,169,109,0.18)] blur-3xl" />
@@ -25,7 +25,7 @@ export default function StatsSection(){
       <div className="relative mx-auto max-w-[1360px]">
         <div className="mb-8 max-w-[680px]">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--tone-muted)]">District Metrics</p>
-          <h2 className="mt-3 text-3xl font-black uppercase tracking-tight text-[var(--tone-heading)] md:text-5xl">
+          <h2 className="mt-3 text-2xl font-black uppercase tracking-tight text-[var(--tone-heading)] md:text-4xl">
             Built on service, growth, and steady district pride
           </h2>
         </div>

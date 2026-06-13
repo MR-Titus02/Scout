@@ -162,21 +162,21 @@ export default function NewsEventsSection({ items }: { items: NewsItem[] }){
             {loopItems.map((item, index) => (
               <article
                 key={`${item.id}-${index}`}
-                className="group relative min-h-[270px] flex-none overflow-hidden rounded-[18px] border border-black/10 bg-[var(--tone-forest)] shadow-[0_12px_30px_rgba(19,32,36,0.18)]"
+                className="group relative min-h-[320px] flex-none overflow-hidden rounded-[18px] border border-black/10 bg-[var(--tone-forest)] shadow-[0_12px_30px_rgba(19,32,36,0.18)]"
                 style={{
                   width: `calc((100% - (${visibleCount} - 1) * ${CAROUSEL_GAP_PX}px) / ${visibleCount})`,
                 }}
               >
                 <img src={item.imageUrl} alt={item.title} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,20,24,0.92)] via-[rgba(10,20,24,0.42)] to-transparent" />
-                <div className="relative flex h-full flex-col justify-between p-4 text-white">
-                  <span className="inline-flex w-fit rounded-full bg-[var(--tone-gold-soft)] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--tone-forest)]">
+                <div className="absolute inset-0 bg-black/20" />
+                <div className="relative flex h-full flex-col justify-between p-4">
+                  <span className="inline-flex w-fit rounded-full bg-[var(--tone-gold-soft)] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--tone-forest)] shadow-md">
                     {item.tag || 'News'}
                   </span>
-                  <div>
-                    <p className="mb-2 text-xs text-white/75">{item.date}</p>
+                  <div className="rounded-xl border border-white/20 bg-white/10 p-4 text-white shadow-lg backdrop-blur-md transition duration-300 group-hover:bg-white/20">
+                    <p className="mb-1 text-xs text-white/80 font-medium">{item.date}</p>
                     <h3 className="text-lg font-bold leading-snug">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-5 text-white/82">
+                    <p className="mt-2 text-sm leading-5 text-white/90">
                       {item.excerpt || 'Explore this activity and join with your local unit.'}
                     </p>
                   </div>
